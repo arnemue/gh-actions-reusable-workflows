@@ -1,0 +1,27 @@
+---
+name: Just dummy step
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        description: Environment to deploy
+        type: string
+      run_id:
+        description: run id to download a model artifact from model registry
+        required: true
+        type: string
+
+
+jobs:
+  simple_echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo inputs
+        id: echo_inputs
+        run: |
+          echo "Branch that was used to start the workflow: ${{ github.ref_name }}"
+          echo "Github workflow started running: $(date +'%Y-%m-%d %H:%M:%S')"
+          echo "Environment to deploy: ${{ inputs.environment }}"
+          echo "Run id: ${{ inputs.run_id }}"
